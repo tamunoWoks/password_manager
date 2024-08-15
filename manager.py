@@ -90,3 +90,7 @@ def main():
             add()
         else:
             print("Invalid mode. Please enter 'view', 'add', or 'q'.")
+
+
+if __name__ == "__main__":
+    main()
