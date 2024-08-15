@@ -37,3 +37,9 @@ def load_salt() -> bytes:
             f.write(salt)
         return salt
 
+# Prompt user for the master password and derive the encryption key
+master_pwd = input("What is your Master Password? ")
+salt = load_salt()
+key = derive_key(master_pwd, salt)
+fer = Fernet(key)
+
