@@ -66,3 +66,12 @@ def view():
         print("No passwords file found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+def add():
+    """Add a new password entry."""
+    name = input("Account Name: ")
+    pwd = input("Password: ")
+    encrypted_pass = fer.encrypt(pwd.encode()).decode()
+
+    with open("passwords.txt", "a") as f:
+        f.write(f"{name}|{encrypted_pass}\n")
