@@ -10,3 +10,7 @@ import base64
 import os
 import secrets
 
+def generate_salt() -> bytes:
+    """Generate a secure random salt."""
+    return secrets.token_bytes(16)
+
