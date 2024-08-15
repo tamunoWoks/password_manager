@@ -75,3 +75,18 @@ def add():
 
     with open("passwords.txt", "a") as f:
         f.write(f"{name}|{encrypted_pass}\n")
+
+def main():
+    """Main loop to add or view passwords."""
+    while True:
+        mode = input(
+            "Would you like to add a new password or view existing ones (view, add)? Press q to quit: "
+        ).lower()
+        if mode == "q":
+            break
+        elif mode == "view":
+            view()
+        elif mode == "add":
+            add()
+        else:
+            print("Invalid mode. Please enter 'view', 'add', or 'q'.")
