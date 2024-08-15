@@ -43,3 +43,26 @@ salt = load_salt()
 key = derive_key(master_pwd, salt)
 fer = Fernet(key)
 
+def view():
+    """Display all stored passwords."""
+    try:
+        with open("passwords.txt", "r") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue  # Skip empty lines
+                parts = line.split("|")
+                if len(parts) != 2:
+                    print(f"Skipping malformed line: {line}")
+                    continue  # Skip lines that don't have exactly two parts
+
+                user, encrypted_pass = parts
+                try:
+                    decrypted_pass = fer.decrypt(encrypted_pass.encode()).decode()
+                    print(f"User: {user} | Password: {decrypted_pass}")
+                except Exception as e:
+                    print(f"Failed to decrypt password for user {user}: {e}")
+    except FileNotFoundError:
+        print("No passwords file found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
