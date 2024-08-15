@@ -26,3 +26,14 @@ def derive_key(master_pwd: str, salt: bytes) -> bytes:
     )
     return base64.urlsafe_b64encode(kdf.derive(master_pwd.encode()))
 
+def load_salt() -> bytes:
+    """Load the salt from a file or create a new one if not present."""
+    if os.path.exists("salt.bin"):
+        with open("salt.bin", "rb") as f:
+            return f.read()
+    else:
+        salt = generate_salt()
+        with open("salt.bin", "wb") as f:
+            f.write(salt)
+        return salt
+
